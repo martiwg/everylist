@@ -1,13 +1,40 @@
 import { useState, useRef } from 'react'
 
+import { addDoc, collection } from 'firebase/firestore'
+import { auth, db } from '../../firebaseConfig'
+
 import styles from './Create.module.css'
 
 const Create = () => {
   const [listName, setListName] = useState('')
   const [newItem, setNewItem] = useState('')
   const [listItems, setListItems] = useState([])
+  const [sharedUsers, setSharedUsers] = useState([])
 
   const inputRef = useRef()
+
+  const handleSave = async () => {
+    let itemsNoOpen = listItems
+
+    itemsNoOpen.forEach(item => {
+      delete item.open
+    })
+
+    let listObj = {
+      name: listName,
+      items: itemsNoOpen,
+      ownerUid: auth.currentUser?.uid,
+      shared: sharedUsers
+    }
+
+    try{
+      const docRef = await addDoc(collection(db, 'lists'), listObj)
+  
+      window.location.pathname = `/list/${docRef.id}`
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   return(
     <div className='globalContainer'>
@@ -76,7 +103,7 @@ const Create = () => {
                           }
                         }}
                         className={styles.itemUnitCountInput}
-                        style={{width: `${item.units.length == 2 ? 3 : 2}ch`}}
+                        style={{width: `${item.units.length === 2 ? 3 : 2}ch`}}
                         type='text'
                         inputMode='numeric'
                         value={item.units}
@@ -93,30 +120,39 @@ const Create = () => {
               })
             }
           </div>
-          <div className={styles.newItemWrapper}>
-            <div
-              className={styles.addBtn}
-              onClick={() => {
-                if (newItem.length > 0) {
-                  setListItems([...listItems, {name: newItem, units: '1', open: false}])
-                  setNewItem('')
-                }
-              }}
-            >
-              <div style={{height: '.8rem', width: '.15rem', backgroundColor: 'var(--color-dark-variant)', borderRadius: '1rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
-              <div style={{width: '.8rem', height: '.15rem', backgroundColor: 'var(--color-dark-variant)', borderRadius: '1rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
+          {
+            listItems.length < 100 &&
+            <div className={styles.newItemWrapper}>
+              <div
+                className={styles.addBtn}
+                onClick={() => {
+                  if (newItem.length > 0) {
+                    setListItems([...listItems, {name: newItem, units: '1', open: false}])
+                    setNewItem('')
+                  }
+                }}
+              >
+                <div style={{height: '.8rem', width: '.15rem', backgroundColor: 'var(--color-dark-variant)', borderRadius: '1rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
+                <div style={{width: '.8rem', height: '.15rem', backgroundColor: 'var(--color-dark-variant)', borderRadius: '1rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/>
+              </div>
+              <input
+                type='text'
+                placeholder='New item'
+                value={newItem}
+                onChange={(e) => {
+                  setNewItem(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
+                }}
+                maxLength={30}
+                className={styles.newItemInput}
+              />
             </div>
-            <input
-              type='text'
-              placeholder='New item'
-              value={newItem}
-              onChange={(e) => {
-                setNewItem(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))
-              }}
-              maxLength={30}
-              className={styles.newItemInput}
-            />
+          }
           </div>
+        <div
+          className={styles.saveBtn}
+          onClick={() => handleSave()}
+        >
+          Save
         </div>
       </div>
     </div>

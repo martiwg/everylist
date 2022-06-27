@@ -99,4 +99,18 @@
 .itemName{
   flex-grow: 1;
   transition: .5s ease-in-out;
+  margin-right: 3.25rem;
+}
+
+.saveBtn{
+  margin-top: 8rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  border-radius: var(--border-radius-2);
+  background-color: #000;
+  color: #fff;
 }
