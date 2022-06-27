@@ -1,3 +1,5 @@
+import { auth } from '../../firebaseConfig'
+
 import styles from './Navbar.module.css'
 
 const Navbar = (props) => {
@@ -20,10 +22,10 @@ const Navbar = (props) => {
       </div>
       <a
         className={styles.newBtn}
-        href='/create'
+        href={auth.currentUser ? '/create' : '/login'}
         rel='noopener noreferrer'
       >
-        New List
+        { auth.currentUser ? 'My Lists' : 'Register'}
       </a>
     </div>
   )
