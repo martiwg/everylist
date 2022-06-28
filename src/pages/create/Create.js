@@ -68,7 +68,7 @@ const Create = () => {
             type='text'
             placeholder='List Name'
             value={listName}
-            onChange={(e) => setListName(e.target.value)}
+            onChange={(e) => setListName(e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1))}
             maxLength={16}
             className={styles.listNameInput}
             ref={nameInputRef}

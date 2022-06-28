@@ -1,0 +1,125 @@
+.nameCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem;
+  margin-top: 5vw;
+  margin-bottom: 5vw;
+  background-color: #fff;
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--box-shadow);
+  gap: 1rem;
+}
+
+.progressTop{
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progressTitle{
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.progressRatioWrapper{
+  border-radius: var(--border-radius-1);
+  padding: .25rem .5rem;
+  background-color: var(--color-light);
+}
+
+.progressRatio{
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-dark-variant);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progressBottom{
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.outterBar{
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 2rem;
+  box-shadow: inset 0 0 5px 1px var(--color-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.innerBar{
+  height: 100%;
+  background-color: var(--color-green);
+  position: relative;
+  transition: .5s ease-in-out;
+}
+
+.progressBtn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(50%, -50%);
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--color-green);
+  /* box-shadow: 0 0 6px rgba(0, 0, 0, 0.15); */
+  transition: .5s ease-in;
+}
+
+.itemsWrapper{
+  padding: 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: var(--border-radius-3);
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+}
+
+.itemWrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .25rem 0;
+}
+
+.leftItemSection{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.checkbox{
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 25%;
+  border: 2px solid var(--color-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  transition: .5s ease-in-out;
+}
+
+.itemName{
+  font-weight: 600;
+  font-size: 1rem;
+  /* color: var(--color-dark-variant); */
+  transition: .5s ease-in-out;
+}
