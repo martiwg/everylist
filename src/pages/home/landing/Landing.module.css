@@ -19,6 +19,7 @@
   background: linear-gradient(130deg, rgb(0, 255, 255), rgb(187, 0, 255));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
+  background-clip: text;
   font-size: 2.75rem;
   font-weight: 700;
   text-align: center;
