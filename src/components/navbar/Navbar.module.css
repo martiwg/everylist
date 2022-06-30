@@ -4,21 +4,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1000;
 }
 
 .sideBtn{
   position: relative;
-  height: fit-content;
+  width: 1.9rem;
+  height: 2rem;
   cursor: pointer;
-  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: .25rem;
 }
 
-.newBtn{
-  border: none;
-  border-radius: var(--border-radius-1);
-  padding: 0.25rem .75rem;
-  text-decoration: none;
-  font-weight: 600;
+.burgerLine{
+  height: 4.5px;
+  width: 100%;
   background-color: #000;
-  color: #fff;
+  border-radius: 1rem;
+}
+
+.registerBtn{
+  border: none;
+  border-radius: 5rem;
+  border-radius: .5rem;
+  padding: 0.25rem .75rem;
+  padding: 0.35rem .9rem;
+  text-decoration: none;
+  font-size: .95rem;
+  font-weight: 600;
+  color: #000;
 }

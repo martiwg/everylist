@@ -4,6 +4,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from '../../firebaseConfig'
 
 import styles from './Create.module.css'
+import Div100vh from 'react-div-100vh'
 
 const Create = () => {
   const [listName, setListName] = useState('')
@@ -48,6 +49,10 @@ const Create = () => {
 
     try{
       const docRef = await addDoc(collection(db, 'lists'), listObj)
+
+      setListName('')
+      setListItems([])
+      setSharedUsers([])
   
       window.location.pathname = `/list/${docRef.id}`
     }catch(err){
@@ -58,7 +63,7 @@ const Create = () => {
   }
 
   return(
-    <div className='globalContainer'>
+    <Div100vh className='globalContainer' style={{minHeight: 'unset'}}>
       <div className='globalWrapper'>
         <div
           className={styles.listNameInputWrapper}
@@ -160,7 +165,6 @@ const Create = () => {
             <div className={styles.newItemWrapper}>
               <div
                 className={styles.addBtn}
-                style={{backgroundColor: itemInputRef.current === document.activeElement ? 'transparent' : 'var(--color-light)'}}
                 onClick={() => {
                   if(newItem.length > 0){
                     setListItems([...listItems, {name: newItem, units: '1', open: false, checked: false}])
@@ -211,7 +215,7 @@ const Create = () => {
             </div>
           }
       </div>
-    </div>
+    </Div100vh>
   )
 }
 

@@ -19,6 +19,8 @@ const List = () => {
   const [checkedItems, setCheckedItems] = useState([])
   const [uncheckedItems, setUncheckedItems] = useState([])
 
+  const [er, setEr] = useState('er')
+
 
   const { id } = useParams()
 
@@ -72,8 +74,28 @@ const List = () => {
           <>
             <div className={styles.nameCard}>
               <div className={styles.progressTop}>
-                <div className={styles.progressTitle}>
-                  {list.name}
+                <div
+                  className={styles.progressTitle}
+                  onClick={() => {
+                    if(navigator.share){
+                      navigator.share({
+                        title: list.name,
+                        text: list.name,
+                        url: window.location.href
+                      })
+                      .then(() => {
+                        setEr('Shared!')
+                      })
+                      .catch(err => {
+                        setEr(err.message)
+                      })
+                    }else{
+                      navigator.clipboard.writeText(window.location.href)
+                      setEr('Copied!')
+                    }
+                  }}
+                >
+                  {list.name}{er}
                 </div>
                 <div className={styles.progressRatioWrapper}>
                   <div className={styles.progressRatio}>
@@ -115,7 +137,7 @@ const List = () => {
                           {item.name}
                         </div>
                       </div>
-                      <div style={{opacity: item.checked ? .5 : 1}}>
+                      <div className={styles.itemUnits} style={{opacity: item.checked ? .5 : 1, width: item.units > 9 ? '3ch' : '2ch'}}>
                         {item.units}
                       </div>
                     </div>

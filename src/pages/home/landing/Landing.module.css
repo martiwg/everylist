@@ -9,7 +9,7 @@
 }
 
 .title{
-  margin-top: 6vh;
+  margin-top: 5vh;
   font-size: 2.75rem;
   font-weight: 700;
   text-align: center;
@@ -217,6 +217,6 @@
 }
 
 .notiText{
-  font-size: .8rem;
+  font-size: .85rem;
   font-weight: 600;
 }
