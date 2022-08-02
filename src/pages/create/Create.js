@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from '../../firebaseConfig'
@@ -53,6 +53,7 @@ const Create = () => {
       setListName('')
       setListItems([])
       setSharedUsers([])
+      setNewItem('')
   
       window.location.pathname = `/list/${docRef.id}`
     }catch(err){

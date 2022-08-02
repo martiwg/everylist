@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 
-const initialState = null
+const initialState = {
+  uid: undefined,
+  err: undefined,
+}
 
 export const Context = React.createContext()
 

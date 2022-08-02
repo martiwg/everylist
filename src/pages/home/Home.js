@@ -12,7 +12,7 @@ const Home = () => {
   return(
     <>
       <div className='globalContainer'>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', position: 'relative', width: '100vw',transition: '.5s ease-in-out', transform: `translateX(${sideOpen ? '80vw' : '0'})`, flexGrow: 1, backdropFilter: 'blur(10px)', overflow: 'hidden'}}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', position: 'relative', width: '100vw', flexGrow: 1, backdropFilter: 'blur(10px)', overflow: 'hidden'}}>
           <div style={{position: 'absolute', filter: 'blur(68px)', zIndex: 0, opacity: .45, top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
             <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-75%, -60%)'}}>
               <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" id="visual" viewBox="0 0 900 900" width="1000" height="1000" version="1.1" fill='#0ff'>
@@ -43,7 +43,9 @@ const Home = () => {
             >
             <Landing />
           </div>
-          <Sidebar />
+          <div style={{transition: '.8s ease-in-out', width: '80vw', height: '100vh', position: 'fixed', top: 0, left: '-80vw', zIndex: 1000000, transform: `translateX(${sideOpen ? '80vw' : 0})`, boxShadow: `1rem 0 50vw rgba(0,0,0,${sideOpen ? .8 : 0})`}}>
+            <Sidebar />
+          </div>
         </div>
       </div>
     </>
