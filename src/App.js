@@ -13,6 +13,7 @@ import Register from './pages/register/Register'
 
 const App = () => {
   const [state, setState] = useContext(Context)
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setState({ ...state, uid: user ? user.uid : undefined })

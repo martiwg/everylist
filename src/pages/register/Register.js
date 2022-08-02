@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
 
 import { setDoc, doc, collection, query, where, getDocs } from 'firebase/firestore'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
@@ -8,8 +8,12 @@ import Div100vh from 'react-div-100vh'
 
 import styles from './Register.module.css'
 import { useNavigate } from 'react-router-dom'
+import { Context } from '../../Store'
+import Toast from '../../components/toast/Toast'
 
 const Register = () => {
+  const [state, setState] = useContext(Context)
+
   const [showLogin, setShowLogin] = useState(false)
   const [loading, setLoading] = useState(false)
   
@@ -35,17 +39,32 @@ const Register = () => {
     setPassword('')
   }
 
+  const addNoti = (message, type) => {
+    setState(prev => ({...prev, notis: [
+      {message: message, type: type},
+      ...prev.notis
+    ]}))
+  }
+
   const handleSignUpError = (err) => {
     switch(err.code){
       case 'auth/email-already-in-use':
+        addNoti('Email already in use', 'error')
         break
       case 'auth/invalid-email':
+        addNoti('Invalid email', 'error')
         emailRef.current.focus()
         break
       case 'auth/weak-password':
+        addNoti('Password is too weak', 'error')
         passwordRef.current.focus()
         break
+      case 'auth/username-already-in-use':
+        addNoti('Username already in use', 'error')
+        usernameRef.current.focus()
+        break
       default:
+        addNoti('Something went wrong', 'error')
         break
     }
   }
@@ -53,12 +72,15 @@ const Register = () => {
   const handleLogInError = (err) => {
     switch(err.code){
       case 'auth/user-not-found':
+        addNoti('User not found', 'error')
         emailRef.current.focus()
         break
       case 'auth/wrong-password':
+        addNoti('Wrong password', 'error')
         passwordRef.current.focus()
         break
       default:
+        addNoti('Something went wrong', 'error')
         break
     }
   }
@@ -96,7 +118,6 @@ const Register = () => {
     if(usernameTaken){
       handleSignUpError({ code: 'auth/username-already-in-use' })
       setLoading(false)
-      usernameRef.current.focus()
       return
     }
     
@@ -140,11 +161,11 @@ const Register = () => {
     }
 
     setLoading(true)
-    
+
     try{
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          window.location.pathname = '/'
+          navigate('/')
         })
         .catch(err => {
           handleLogInError(err)
@@ -159,6 +180,7 @@ const Register = () => {
   
   return (
     <Div100vh className='globalContainer' style={{minHeight: 'unset', transition: '.5s ease'}}>
+      <Toast />
       <div className='globalWrapper'>
         <div className={styles.container}>
           <div className={styles.title}>
@@ -175,6 +197,7 @@ const Register = () => {
                     name
                   </div>
                   <input
+                    ref={nameRef}
                     className={styles.input}
                     type='text'
                     maxLength={50}
@@ -187,6 +210,7 @@ const Register = () => {
                     surname
                   </div>
                   <input
+                    ref={surnameRef}
                     className={styles.input}
                     type='text'
                     maxLength={50}
@@ -212,6 +236,7 @@ const Register = () => {
             email
           </div>
           <input
+            ref={emailRef}
             className={styles.input}
             type='email'
             maxLength={50}
@@ -222,6 +247,7 @@ const Register = () => {
             password
           </div>
           <input
+            ref={passwordRef}
             className={styles.input}
             type='password'
             maxLength={50}

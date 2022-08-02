@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const initialState = {
   uid: undefined,
-  err: undefined,
+  notis: [],
 }
 
 export const Context = React.createContext()

@@ -24,8 +24,11 @@ body{
   --color-primary-light: #88DDFF;
   --color-primary-dark: #0ABAFF;
   --color-red: #ff736e;
+  --color-red-transparent: rgba(255, 0, 0, 0.15);
   --color-green: #23ed74;
-  --color-yellow: #ffbb55;
+  --color-green-transparent: rgba(35, 237, 116, 0.15);
+  --color-yellow: #ffc155;
+  --color-yellow-transparent: rgba(255, 196, 0, 0.15);
   --color-white: #ffffff;
   --color-info-light: #dce1eb;
   --color-info: #909090;
