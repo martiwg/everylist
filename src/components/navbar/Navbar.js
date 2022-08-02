@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { auth } from '../../firebaseConfig'
 
 import styles from './Navbar.module.css'
@@ -15,7 +16,7 @@ const Navbar = (props) => {
       </div>
       <a
         className={styles.registerBtn}
-        href={auth.currentUser ? '/create' : '/login'}
+        href={auth.currentUser ? '/create' : '/register'}
         rel='noopener noreferrer'
       >
         { auth.currentUser ? 'My Lists' : 'Sign Up' }

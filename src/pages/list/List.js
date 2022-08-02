@@ -19,9 +19,6 @@ const List = () => {
   const [checkedItems, setCheckedItems] = useState([])
   const [uncheckedItems, setUncheckedItems] = useState([])
 
-  const [er, setEr] = useState('er')
-
-
   const { id } = useParams()
 
   const downloadList = async () => {
@@ -76,26 +73,10 @@ const List = () => {
               <div className={styles.progressTop}>
                 <div
                   className={styles.progressTitle}
-                  onClick={() => {
-                    if(navigator.share){
-                      navigator.share({
-                        title: list.name,
-                        text: list.name,
-                        url: window.location.href
-                      })
-                      .then(() => {
-                        setEr('Shared!')
-                      })
-                      .catch(err => {
-                        setEr(err.message)
-                      })
-                    }else{
-                      navigator.clipboard.writeText(window.location.href)
-                      setEr('Copied!')
-                    }
-                  }}
+                  onClick={() => navigator.clipboard.writeText(window.location.href)}
                 >
-                  {list.name}{er}
+                  {/* ADD COPY SVG */}
+                  {list.name}
                 </div>
                 <div className={styles.progressRatioWrapper}>
                   <div className={styles.progressRatio}>

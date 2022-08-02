@@ -79,6 +79,7 @@
 
 .itemsWrapper{
   padding: 1rem 1.5rem;
+  margin-bottom: 5vw;
   width: 100%;
   display: flex;
   flex-direction: column;

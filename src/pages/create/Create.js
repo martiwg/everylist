@@ -63,7 +63,7 @@ const Create = () => {
   }
 
   return(
-    <Div100vh className='globalContainer' style={{minHeight: 'unset'}}>
+    <Div100vh className='globalContainer' style={{minHeight: 'unset', transition: '1.5s ease'}}>
       <div className='globalWrapper'>
         <div
           className={styles.listNameInputWrapper}
